@@ -1,18 +1,18 @@
 // import necessary libraries and components
-import React, { useState, useEffect } from "react"; 
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { registerRoute } from "../utils/APIRoutes";
 import { ToastContainer, toast } from "react-toastify";
 
-import Logo from "../assets/logo.svg"; 
+import Logo from "../assets/logo.svg";
 import axios from "axios";
 
 import "react-toastify/dist/ReactToastify.css";
-import "./account-form.css";
+import "./css/account-form.css";
+import "./css/submit-btn.css";
 const Register = () => {
-  const navigate = useNavigate(); // React hook for navigation
+  const navigate = useNavigate();
   const [values, setValues] = useState({
-    // React hook for managing state
     username: "",
     email: "",
     password: "",
@@ -38,7 +38,6 @@ const Register = () => {
   const handleSubmit = async (event) => {
     event.preventDefault(); // Prevent default form submission behavior
     if (handleValidation()) {
-      // Validate form input
       const { password, username, email } = values;
       const data = await axios.post(registerRoute, {
         // Send registration request to API
@@ -113,7 +112,9 @@ const Register = () => {
             name="confirmPassword"
             onChange={(e) => handleChange(e)}
           />
-          <button type="submit">Register</button>
+          <button className="submit-btn" type="submit">
+            Register
+          </button>
           <span>
             already have an account ? <Link to="/login">Login</Link>
           </span>

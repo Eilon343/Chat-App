@@ -49,23 +49,6 @@
   outline: none;
 }
 
-.form-container form button {
-  background-color: #997af0;
-  color: white;
-  padding: 1rem 2rem;
-  border: none;
-  font-weight: bold;
-  cursor: pointer;
-  border-radius: 0.4rem;
-  font-size: 1rem;
-  text-transform: uppercase;
-}
-
-.form-container form button:hover {
-  transition: 0.3s ease-in-out;
-  background-color: #4e0eff;
-}
-
 .form-container form span {
   color: white;
   text-transform: uppercase;
