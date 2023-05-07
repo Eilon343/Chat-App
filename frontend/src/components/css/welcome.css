@@ -1,0 +1,20 @@
+.wrapper-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: white;
+}
+.wrapper-content img {
+  height: 20rem;
+}
+
+.wrapper-content span {
+  color: #4e0eff;
+}
+
+.wrapper-loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -4,11 +4,15 @@ import { allUsersRoute } from "../utils/APIRoutes";
 import { useNavigate } from "react-router-dom";
 import Contacts from "../components/Contacts";
 import "./css/chat.css";
+import Welcome from "../components/Welcome";
+import ChatContainer from "../components/ChatContainer";
 
 // This component represents the main Chat interface.
 const Chat = () => {
   const [contacts, setContacts] = useState([]);
   const [currentUser, setCurrentUser] = useState(undefined);
+  const [currentChat, setCurrentChat] = useState(undefined);
+  const [isCurrentUserLoaded, setIsCurrentUserLoaded] = useState(false);
 
   const navigate = useNavigate();
 
@@ -22,6 +26,7 @@ const Chat = () => {
       } else {
         // If the user is logged in, set the current user state to the parsed user data from the localStorage.
         setCurrentUser(await JSON.parse(localStorage.getItem("chat-app-user")));
+        setIsCurrentUserLoaded(true);
       }
     }
     fetchCurrentUser();
@@ -36,18 +41,37 @@ const Chat = () => {
           const data = await axios.get(`${allUsersRoute}/${currentUser._id}`);
           setContacts(data.data);
         } else {
+          console.log(currentUser);
           // If the current user has not set their avatar image, navigate to the setAvatar route.
           navigate("/setAvatar");
         }
       }
     }
-    fetchAllUsers();
+    if (isCurrentUserLoaded) {
+      fetchAllUsers();
+    }
   }, [currentUser]);
+
+  const handleChatChange = (chat) => {
+    setCurrentChat(chat);
+  };
 
   return (
     <div className="container">
       <div className="chat">
-        <Contacts contacts={contacts} currentUser={currentUser} />
+        <Contacts
+          contacts={contacts}
+          currentUser={currentUser}
+          changeChat={handleChatChange}
+        />
+        {currentChat === undefined ? (
+          <Welcome
+            currentUser={currentUser}
+            isCurrentUserLoaded={isCurrentUserLoaded}
+          />
+        ) : (
+          <ChatContainer currentChat={currentChat} currentUser={currentUser} />
+        )}
       </div>
     </div>
   );
