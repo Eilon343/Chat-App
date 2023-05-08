@@ -11,6 +11,7 @@ import "./css/submit-btn.css";
 
 // define a functional component
 const Login = () => {
+  const localHostKey = process.env.REACT_APP_LOCALHOST_KEY;
   // use the hook 'useNavigate' from react-router-dom to navigate through the application
   const navigate = useNavigate();
 
@@ -31,7 +32,7 @@ const Login = () => {
 
   // useEffect hook to check if the user is already logged in
   useEffect(() => {
-    if (localStorage.getItem("chat-app-user")) {
+    if (localStorage.getItem(localHostKey)) {
       navigate("/");
     }
   }, []);
@@ -49,7 +50,7 @@ const Login = () => {
         toast.error(data.data.msg, toastOptions);
       }
       if (data.data.status === true) {
-        localStorage.setItem("chat-app-user", JSON.stringify(data.data.user));
+        localStorage.setItem(localHostKey, JSON.stringify(data.data.user));
         navigate("/");
       }
     }

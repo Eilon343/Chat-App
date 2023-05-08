@@ -11,6 +11,7 @@ import "./css/set-avatar.css";
 
 // This function sets the avatar for the user by fetching a random avatar image from the multiavatar API and setting it as the user's profile picture.
 const SetAvatar = () => {
+  const localHostKey = process.env.REACT_APP_LOCALHOST_KEY;
   // Store the API key and the API URL for fetching the avatar images
   const avatarApiKey = process.env.REACT_APP_AVATAR_API_KEY;
   const api = "https://api.multiavatar.com/45678945/";
@@ -32,7 +33,7 @@ const SetAvatar = () => {
 
   // Check if the user is logged in, and redirect to the login page if they are not
   useEffect(() => {
-    if (!localStorage.getItem("chat-app-user")) {
+    if (!localStorage.getItem(localHostKey)) {
       navigate("/login");
     }
   }, []);
@@ -43,7 +44,7 @@ const SetAvatar = () => {
       toast.error("Please select an avatar", toastOptions);
     } else {
       // Get the user from local storage
-      const user = await JSON.parse(localStorage.getItem("chat-app-user"));
+      const user = await JSON.parse(localStorage.getItem(localHostKey));
       // Send a POST request to the server to set the user's profile picture
       const { data } = await axios.post(`${setAvatarRoute}/${user._id}`, {
         image: avatars[selectedAvatar],
@@ -53,7 +54,7 @@ const SetAvatar = () => {
       if (data.isSet) {
         user.isAvatarImageSet = true;
         user.avatarImage = data.image;
-        localStorage.setItem("chat-app-user", JSON.stringify(user));
+        localStorage.setItem(localHostKey, JSON.stringify(user));
         navigate("/");
       } else {
         toast.error("Error setting avatar, please try again", toastOptions);

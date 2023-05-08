@@ -10,6 +10,7 @@ import { io } from "socket.io-client";
 
 // This component represents the main Chat interface.
 const Chat = () => {
+  const localHostKey = process.env.REACT_APP_LOCALHOST_KEY;
   const socket = useRef();
   const [contacts, setContacts] = useState([]);
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -22,12 +23,12 @@ const Chat = () => {
   useEffect(() => {
     async function fetchCurrentUser() {
       // Check if the user is not logged in.
-      if (!localStorage.getItem("chat-app-user")) {
+      if (!localStorage.getItem(localHostKey)) {
         // If the user is not logged in, navigate to the login page.
         navigate("/login");
       } else {
         // If the user is logged in, set the current user state to the parsed user data from the localStorage.
-        setCurrentUser(await JSON.parse(localStorage.getItem("chat-app-user")));
+        setCurrentUser(await JSON.parse(localStorage.getItem(localHostKey)));
         setIsCurrentUserLoaded(true);
       }
     }
