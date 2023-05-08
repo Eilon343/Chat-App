@@ -62,16 +62,18 @@ module.exports.setAvatar = async (req, res, next) => {
   try {
     const userId = req.params.id;
     const avatarImage = req.body.image;
-
     // Updates the user's data in the database with the new avatar image.
-    const userData = await User.findByIdAndUpdate(userId, {
-      isAvaterImageSet: true,
-      avatarImage,
-    });
-
+    const userData = await User.findByIdAndUpdate(
+      userId,
+      {
+        isAvatarImageSet: true,
+        avatarImage,
+      },
+      { new: true }
+    );
     // Returns a JSON response indicating whether the image was set and the URL of the image.
     return res.json({
-      isSet: userData.isAvaterImageSet,
+      isSet: userData.isAvatarImageSet,
       image: userData.avatarImage,
     });
   } catch (ex) {

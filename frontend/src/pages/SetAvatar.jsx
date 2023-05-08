@@ -48,6 +48,7 @@ const SetAvatar = () => {
       const { data } = await axios.post(`${setAvatarRoute}/${user._id}`, {
         image: avatars[selectedAvatar],
       });
+      console.log(data);
       // If the avatar is successfully set, update the user's information in local storage and redirect to the home page
       if (data.isSet) {
         user.isAvatarImageSet = true;
