@@ -33,7 +33,7 @@ const Register = () => {
       // If user is already logged in, navigate to home page
       navigate("/");
     }
-  }, []);
+  }, [navigate]);
 
   const handleSubmit = async (event) => {
     event.preventDefault(); // Prevent default form submission behavior
