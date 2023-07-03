@@ -11,6 +11,7 @@
     "buffer": "^6.0.3",
     "emoji-picker-react": "^3.6.5",
     "env-cmd": "^10.1.0",
+    "firebase": "^9.23.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.8.0",
@@ -23,7 +24,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "env-cmd -f .env.development react-scripts start",
+    "start:production": "env-cmd -f .env.productionenv-cmd -f .env.production react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

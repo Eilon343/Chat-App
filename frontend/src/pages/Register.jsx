@@ -10,6 +10,7 @@ import axios from "axios";
 import "react-toastify/dist/ReactToastify.css";
 import "./css/account-form.css";
 import "./css/submit-btn.css";
+import SocialLoginButtons from "../components/SocialLoginButtons";
 const Register = () => {
   const navigate = useNavigate();
   const [values, setValues] = useState({
@@ -115,6 +116,7 @@ const Register = () => {
           <button className="submit-btn" type="submit">
             Register
           </button>
+          <SocialLoginButtons />
           <span>
             already have an account ? <Link to="/login">Login</Link>
           </span>

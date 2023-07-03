@@ -8,6 +8,7 @@ import axios from "axios";
 import "react-toastify/dist/ReactToastify.css";
 import "./css/account-form.css";
 import "./css/submit-btn.css";
+import SocialLoginButtons from "../components/SocialLoginButtons";
 
 // define a functional component
 const Login = () => {
@@ -98,6 +99,7 @@ const Login = () => {
           <button className="submit-btn" type="submit">
             Log In
           </button>
+          <SocialLoginButtons />
           <span>
             Don't have an acount ? <Link to="/register">Register</Link>
           </span>

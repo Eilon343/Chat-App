@@ -34,6 +34,26 @@ module.exports.register = async (req, res, next) => {
   }
 };
 
+module.exports.firebaseLogin = async (req, res, next) => {
+  try {
+    const { email } = req.body;
+    if (email) {
+      const user = await User.findOne({ email });
+      if (user) {
+        delete user.password;
+        return res.json({ status: true, user });
+      } else {
+        return res.json({
+          status: false,
+          msg: "Email not found in database, welcome new user",
+        });
+      }
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
 // Function to handle user login
 module.exports.login = async (req, res, next) => {
   try {
@@ -78,6 +98,20 @@ module.exports.setAvatar = async (req, res, next) => {
     });
   } catch (ex) {
     next(ex);
+  }
+};
+
+module.exports.checkUsername = async (req, res, next) => {
+  try {
+    const { username } = req.body;
+    const user = await User.findOne({ username });
+    if (user) {
+      return res.json({ status: false, message: "Username unavailable" });
+    } else {
+      return res.json({ status: true, message: "Username Available" });
+    }
+  } catch (err) {
+    next(err);
   }
 };
 

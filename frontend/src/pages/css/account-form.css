@@ -43,6 +43,19 @@
   width: 100%;
   font-size: 1rem;
 }
+.form-container form input.success {
+  border-color: #39ff14;
+  &:focus {
+    border-color: #39ff14;
+  }
+}
+
+.form-container form input.danger {
+  border-color: #ff3131;
+  &:focus {
+    border-color: #ff3131;
+  }
+}
 
 .form-container form input:focus {
   border: 0.1rem solid #997af0;
@@ -58,4 +71,18 @@
   color: #4e0eff;
   text-decoration: none;
   font-weight: bold;
+}
+
+.form-container label {
+  display: block;
+  margin: 10px 0 0 5px;
+  transition: 0.3s ease-in-out;
+  height: 0.5rem;
+}
+.form-container label.success {
+  color: #39ff14;
+}
+
+.form-container label.danger {
+  color: #ff3131;
 }
